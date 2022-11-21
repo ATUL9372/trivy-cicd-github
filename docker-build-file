@@ -1,0 +1,25 @@
+  GNU nano 6.2                                                                                                   my-docker-images                                                                                                             
+Sending build context to Docker daemon  4.096kB
+
+Step 1/7 : FROM python:3.10.7-alpine3.16
+ ---> 2bbcf2f78d64
+Step 2/7 : WORKDIR /app
+ ---> Using cache
+ ---> 89a7d5c912e4
+Step 3/7 : ADD ./requirements.txt /app/
+ ---> Using cache
+ ---> e89e5e42fdc4
+Step 4/7 : RUN pip install --upgrade pip
+ ---> Using cache
+ ---> 1c2086aba209
+Step 5/7 : RUN pip install --no-cache-dir --upgrade -r requirements.txt
+ ---> Using cache
+ ---> ce2b148fa6ca
+Step 6/7 : COPY . /app/
+ ---> 74fc73357123
+Step 7/7 : CMD ["python", "main.py"]
+ ---> Running in c3ce6d88bdc6
+Removing intermediate container c3ce6d88bdc6
+ ---> cbc19e8b301b
+Successfully built cbc19e8b301b
+Successfully tagged akk:latest

@@ -1,1 +1,1 @@
-# trivy-cicd-github
+# github-action-cicd
