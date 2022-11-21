@@ -30,7 +30,7 @@ jobs:
         with:
           scan-ref: 'fs'
 #           image-ref: 'trivy-docker-image-run:${{ github.sha }}'
-          image-ref: '.'
+          #image-ref: '.'
           format: 'table'
           output: 'trivy-results-images-fs-trivy'
           security-checks: vuln,secret,config
