@@ -34,7 +34,7 @@ jobs:
           format: 'table'
           output: 'trivy-results-images-fs-trivy'
           security-checks: vuln,secret,config
-          vuln-type: 'os,library'
+         # vuln-type: 'os,library'
           severity: 'HIGH,CRITICAL'
           exit-code: '1'
           
