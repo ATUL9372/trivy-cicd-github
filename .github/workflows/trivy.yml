@@ -1,0 +1,46 @@
+name: build
+
+on:
+  pull_request:
+    types: [opened, reopened]
+    
+    branches:
+      - main    
+
+# env:
+#   # Use docker.io for Docker Hub if empty
+#   REGISTRY: ghcr.io 
+#   # github.repository as <account>/<repo>
+#   IMAGE_NAME: ${{ github.repository }}
+    
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Step 1 Checkout code
+        uses: actions/checkout@v3  
+        
+#       - name: Build an image from Dockerfile
+#         run: |
+#           docker build -t trivy-docker-image-run:${{ github.sha }} .
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-ref: 'fs'
+#           image-ref: 'trivy-docker-image-run:${{ github.sha }}'
+          image-ref: 'ghcr.io/atul9372/trivy-cicd-github:main'
+          format: 'table'
+          output: 'trivy-results-images-fs-trivy'
+          security-checks: vuln,secret,config
+          vuln-type: 'os,library'
+          severity: 'HIGH,CRITICAL'
+          exit-code: '1'
+          
+      - name: Step 3 Upload a Build Artifact
+        uses: actions/upload-artifact@v3.1.1
+        if: always()        
+        with:
+         name: Trivy-output-artifact-images-fs
+         path: trivy-results-images-fs-trivy
